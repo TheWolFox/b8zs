@@ -21,11 +21,12 @@ class Server:
 
     def receiveMessage(self):
         while True:
-            # receive data stream. it won't accept data packet greater than 1024 bytes
             data = self.conn.recv(1024).decode()
-            if not data:
+            if data != '':
+                return data
+                print("from connected user: " + str(data))
                 break
-            print("from connected user: " + str(data))
+            
 
     def start(self, host, port):
         self.setup(host, port)
