@@ -2,6 +2,7 @@ from Vegenere import Vegenere
 from LineCode import B8ZS
 from Server import Server
 from Client import Client
+from Interface import selectorWindow
 
 import matplotlib.pyplot as plt
 
@@ -51,4 +52,7 @@ if __name__ == "__main__":
             print('Forma Binária: \n', binaryString)
             print('Sinal: \n', sig)
             client.sendMessage(crypt.signalToString(sig))
+    
+    app = selectorWindow()
+    app.run()
     
