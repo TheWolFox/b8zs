@@ -31,4 +31,4 @@ class Server:
     def start(self, host, port):
         self.setup(host, port)
         self.connect()
-        self.receiveMessage()
+        #self.receiveMessage()
