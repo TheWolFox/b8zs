@@ -15,15 +15,9 @@ class Client:
         self.client_socket = socket.socket()
         self.client_socket.connect((self.host, self.port))
 
-    def sendMessage(self):
-        print('Send Message')
-        message = input(" -> ")
-
-        while True:
-            self.client_socket.send(message.encode())
-            message = input(" -> ")
+    def sendMessage(self, message):
+        self.client_socket.send(message.encode())
 
     def start(self, host, port):
         self.setup(host, port)
         self.connect()
-        self.sendMessage()

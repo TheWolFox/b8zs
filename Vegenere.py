@@ -50,9 +50,15 @@ class Vegenere:
         return alphabet[i]
 
     def fitKeyword(self):
-        times = math.floor(len(self.inputC)/len(self.keyword))
-        rest = len(self.inputC) - times*len(self.keyword)
-        return self.keyword*times + self.keyword[:rest]
+        if self.inputC == '':
+            times = math.floor(len(self.stringD)/len(self.keyword))
+            rest = len(self.stringD) - times*len(self.keyword)
+            return self.keyword*times + self.keyword[:rest]
+        else:
+            times = math.floor(len(self.inputC)/len(self.keyword))
+            rest = len(self.inputC) - times*len(self.keyword)
+            return self.keyword*times + self.keyword[:rest]
+
     
     def getCryptographedMessage(self):
 
@@ -105,6 +111,20 @@ class Vegenere:
         self.binaryD = []
         self.outputD = ''
         self.stringD = ''
+
+    def signalToString(self, signal):
+        signal = [2 if x==-1 else x for x in signal]
+        s = ''.join([str(item) for item in signal])
+        return s
+
+    def stringToSignal(self, str):
+        newSignal = []
+
+        letToNum = {'0': 0, '1': 1, '2': -1} 
+        for i in str:
+            newSignal.append(letToNum[i])
+        
+        return newSignal
     
     
     
