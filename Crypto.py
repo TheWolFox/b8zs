@@ -5,9 +5,10 @@ class Vegenere:
         self.inputC = ''
         self.binaryC = []
         self.outputC = ''
-        self.inputD = ''
+        self.inputD = []
         self.binaryD = []
         self.outputD = ''
+        self.stringD = ''
 
         self.keyword = 'crystalgems'
 
@@ -36,6 +37,18 @@ class Vegenere:
         
         return alphabet[i]
 
+    def getDecryptographedLetter(self, index, letter):
+        alphabet = 'abcdefghijklmnopqrstuvwxyzàáãâéêóôõíúçABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÃÂÉÊÓÕÍÚÇ'
+
+        if letter not in alphabet:
+            return letter
+
+        i = alphabet.index(letter) - self.charToIndex[index]
+        if i < 0:
+            i+= len(alphabet)
+        
+        return alphabet[i]
+
     def fitKeyword(self):
         times = math.floor(len(self.inputC)/len(self.keyword))
         rest = len(self.inputC) - times*len(self.keyword)
@@ -49,6 +62,15 @@ class Vegenere:
             self.outputC+= self.getCryptographedLetter(keyword[i], letter)
         
         return self.outputC
+
+    def getDecryptographedMessage(self):
+
+        keyword = self.fitKeyword()
+
+        for i, letter in enumerate(self.stringD):
+            self.outputD+= self.getDecryptographedLetter(keyword[i], letter)
+        
+        return self.outputD
     
     def convertBinary(self):
         binaryC = ''
@@ -63,11 +85,26 @@ class Vegenere:
 
         return self.binaryC
 
+    def convertToString(self):
+        self.binaryD = [self.inputD[i:i + 8] for i in range(0, len(self.inputD), 8)]
+        
+
+        for byte in self.binaryD:
+            self.stringD += chr(int(''.join([str(item) for item in byte]), 2))
+        
+        return self.stringD
+
     def encodeVegenere(self, inputC):
         self.inputC = inputC
+        self.binaryC = []
+        self.outputC = ''
 
     def decodeVegenere(self, inputD):
         self.inputD = inputD
+
+        self.binaryD = []
+        self.outputD = ''
+        self.stringD = ''
     
     
     
