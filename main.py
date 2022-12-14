@@ -2,7 +2,6 @@ from Vegenere import Vegenere
 from LineCode import B8ZS
 from Server import Server
 from Client import Client
-from Interface import selectorWindow
 
 if __name__ == "__main__":
     # crypt = Vegenere()
@@ -27,7 +26,4 @@ if __name__ == "__main__":
     elif choice == 'c':
         client = Client()
         client.start('127.0.0.1', 3000)
-    
-    app = selectorWindow()
-    app.run()
     
